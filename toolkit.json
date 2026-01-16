@@ -1,0 +1,50 @@
+{
+  "slug": "monday-attachment-downloader",
+  "display_name": "Monday.com Attachment Downloader",
+  "description": "Downloads attachments from Monday.com board items based on status and date filters. Processes items from the last 2 days with 'Retry' or empty status.",
+  "version": "1.0.0",
+  "entrypoint": {
+    "type": "python",
+    "command": "python main.py"
+  },
+  "capabilities": [
+    {
+      "name": "download_attachments",
+      "description": "Downloads attachments from Monday.com board items. Processes items from specified groups that have 'Retry' or empty status from the last 2 days.",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "api_token": {
+            "type": "string",
+            "description": "Monday.com API authentication token"
+          },
+          "workspace_name": {
+            "type": "string",
+            "description": "Name of the workspace containing the board"
+          },
+          "board_name": {
+            "type": "string",
+            "description": "Name of the board to process"
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of group names to process"
+          },
+          "group_folder_map": {
+            "type": "object",
+            "description": "Mapping of group names to download folder paths",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "required": ["api_token", "workspace_name", "board_name", "groups", "group_folder_map"]
+      }
+    }
+  ],
+  "author": "Monday.com Toolkit",
+  "tags": ["monday", "attachments", "download", "automation"]
+}
